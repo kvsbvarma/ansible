@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: caretion of ec2
+    ec2: 
+      aws_access_key: AKIAI7P22IW4LJGBNORA
+      aws_secret_key: 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
+      key_name: ansible_new
+      instance_type: t2.micro
+      image: ami-d783a9b8
+      region: ap-south-1
+      count: 1
+      instance_tags:
+         name: httpd
+      wait: yes

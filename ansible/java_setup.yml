@@ -1,0 +1,23 @@
+---
+- hosts: web
+  connection: ssh
+  remote_user: ansadm
+  become_user: root
+  become: yes
+  tasks:
+  - name: download Java pckage on remote machine
+    get_url:
+      url: http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz
+      dest: /tmp
+      headers: 'Cookie: oraclelicense=accept-securebackup-cookie'
+  - name: unarchive Java package software  
+    unarchive: src=/tmp/jdk-8u131-linux-x64.tar.gz dest=/opt/java/ copy=no
+    tags:
+       - copy
+  - name: Fix ownership
+    file: state=directory path=/opt/java/jdk1.8.0_131 owner=root group=root recurse=yes
+    tags:
+      - ownership
+  - name: Make Java available for system
+    command: 'alternatives --install "/usr/bin/java" "java" "/opt/java/jdk1.8.0_131/bin/java" 2000'
+    tags: configure

@@ -1,0 +1,18 @@
+---
+- hosts: web 
+  remote_user: ansadm
+  become: yes
+  tasks:
+  - name: get the service stat
+    service_facts:
+  - debug:
+      var: ansible_facts.services['ntpd.service']['state']
+
+  - set_fact:
+      service_status: "{{ansible_facts.services['ntpd.service']['state']}}"
+    
+  - name: start service if it is sttpped
+    service:
+       name=ntpd
+       state=started
+    when: service_status == 'stopped'

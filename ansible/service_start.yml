@@ -1,0 +1,11 @@
+---
+- hosts: web
+  remote_user: ansadm
+  become_user: root
+  become: yes
+  tasks:
+  
+  - name: start service 
+    service:
+       name=crond
+       state=started

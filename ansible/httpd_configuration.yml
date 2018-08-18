@@ -1,0 +1,17 @@
+---
+-  hosts: web
+   remote_user: ansadm
+   tasks:
+   - name: httpd package installation
+     yum: name=httpd state=latest
+     become_user: root
+     become_method: sudo
+     become: yes
+   - name: service start
+     service: name=httpd state=restarted
+     become_user: root
+     become_method: sudo
+     become: yes
+   - name: cing web file
+     copy: src=/var/tmp/sathish dest=/var/www/html/index.html  
+  

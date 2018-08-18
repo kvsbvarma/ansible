@@ -1,0 +1,14 @@
+---
+- hosts: new 
+  remote_user: root
+  become: yes
+  tasks:
+  - name : Creating user in the remote server
+    user:
+      name: ansadm
+      password: ansadm
+    run_once: true
+  - name : copy the ssh_key in the remote server
+    authorized_key: 
+       user=ansadm key="{{ lookup('file', '/home/ansadm/.ssh/id_rsa.pub') }}"
+    run_once: true
