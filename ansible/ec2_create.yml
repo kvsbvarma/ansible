@@ -4,8 +4,8 @@
   tasks:
   - name: caretion of ec2
     ec2: 
-      aws_access_key: AKIAI7P22IW4LJGBNORA
-      aws_secret_key: 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
+      aws_access_key:*********
+      aws_secret_key: *********
       key_name: ansible_new
       instance_type: t2.micro
       image: ami-d783a9b8
