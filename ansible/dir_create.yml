@@ -1,0 +1,23 @@
+---
+- hosts: web
+  remote_user: ansadm
+  tasks:
+  - name: directory creation
+    file:
+      path: /var/tmp/sathish/test_dir
+      owner: ansadm
+      group: ansadm
+      mode: 0755
+      state: directory
+  - name: create file
+    file:
+      path: /var/tmp/sathish/test_dir/test_file
+      owner: ansadm
+      group: ansadm
+      mode: 0755
+      state: touch
+  - name: copy file to remote machine
+    copy:
+      src: /home/ansadm/varma.test
+      dest: /var/tmp/sathish/test_dir/test_file
+       

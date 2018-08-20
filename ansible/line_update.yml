@@ -1,0 +1,9 @@
+---
+- hosts: web
+  remote_user: ansadm
+  tasks:
+  - name: adding line
+    lineinfile:
+       path: /var/tmp/sathish/test_dir/test_file
+       insertafter: 'hello jenkins'
+       line: 'linux'
